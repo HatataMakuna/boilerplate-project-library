@@ -1,10 +1,4 @@
-/*
-*
-*
-*       FILL IN EACH FUNCTIONAL TEST BELOW COMPLETELY
-*       -----[Keep the tests in the same order!]-----
-*       
-*/
+// If run for the first time, add a book first manually on your browser to make all tests pass
 
 const chaiHttp = require('chai-http');
 const chai = require('chai');
@@ -60,7 +54,8 @@ suite('Functional Tests', function() {
           .send({ })
           .end(function(err, res) {
             assert.equal(res.status, 200);
-            assert.equal(res.body.error, 'missing required field title', 'Response should indicate missing title');
+            assert.isString(res.text, 'response should be a string');
+            assert.equal(res.text, 'missing required field title', 'Response should indicate missing title');
             done();
           });
       });
@@ -87,7 +82,8 @@ suite('Functional Tests', function() {
           .get('/api/books/64a7f0f4e4b0c8b1c8e4d1a1') // Assuming this ID does not exist
           .end(function(err, res){
             assert.equal(res.status, 200);
-            assert.equal(res.body.error, 'no book exists', 'Response should indicate no book exists');
+            assert.isString(res.text, 'response should be a string');
+            assert.equal(res.text, 'no book exists', 'Response should indicate no book exists');
             done();
           });
       });
@@ -128,7 +124,8 @@ suite('Functional Tests', function() {
           .send({ })
           .end(function(err, res) {
             assert.equal(res.status, 200);
-            assert.equal(res.body.error, 'missing required field comment', 'Response should indicate missing comment');
+            assert.isString(res.text, 'response should be a string');
+            assert.equal(res.text, 'missing required field comment', 'Response should indicate missing comment');
             done();
           });
       });
@@ -139,7 +136,8 @@ suite('Functional Tests', function() {
           .send({ comment: 'Test Comment' })
           .end(function(err, res){
             assert.equal(res.status, 200);
-            assert.equal(res.body.error, 'no book exists', 'Response should indicate no book exists');
+            assert.isString(res.text, 'response should be a string');
+            assert.equal(res.text, 'no book exists', 'Response should indicate no book exists');
             done();
           });
       });
@@ -151,7 +149,8 @@ suite('Functional Tests', function() {
           .delete(`/api/books/${validId}`)
           .end(function(err, res){
             assert.equal(res.status, 200);
-            assert.equal(res.body.message, 'delete successful', 'Response should indicate successful deletion');
+            assert.isString(res.text, 'response should be a string');
+            assert.equal(res.text, 'delete successful', 'Response should indicate successful deletion');
             done();
           });
       });
@@ -161,7 +160,8 @@ suite('Functional Tests', function() {
           .delete('/api/books/64a7f0f4e4b0c8b1c8e4d1a1')
           .end(function(err, res){
             assert.equal(res.status, 200);
-            assert.equal(res.body.error, 'no book exists', 'Response should indicate no book exists');
+            assert.isString(res.text, 'response should be a string');
+            assert.equal(res.text, 'no book exists', 'Response should indicate no book exists');
             done();
           });
       });
